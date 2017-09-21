@@ -1,0 +1,76 @@
+package drawingpanel;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LayoutManager;
+import java.awt.Shape;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.Line2D;
+
+import javax.swing.JPanel;
+import javax.swing.event.MouseInputAdapter;
+
+import com.sun.prism.BasicStroke;
+
+import examples.MouseInputAdapterDemo.MyMouseInputAdapter;
+
+public class DrawingPanel extends JPanel {
+    
+    final private int WIDTH = 600;
+    final private int HEIGHT = 400;
+    
+    
+    
+    
+    
+    private MouseListener listener = new MyMouseListener();
+
+    public DrawingPanel() {
+        super(new BorderLayout());
+        setBackground(Color.WHITE);
+        setSize(WIDTH, HEIGHT);
+        
+        addMouseListener(listener);
+        
+    }
+
+    public DrawingPanel(LayoutManager layout) {
+        super(layout);
+        
+    }
+
+    public DrawingPanel(boolean isDoubleBuffered) {
+        super(isDoubleBuffered);
+        
+    }
+
+    public DrawingPanel(LayoutManager layout, boolean isDoubleBuffered) {
+        super(layout, isDoubleBuffered);
+        
+    }
+    
+    public void paintComponent (Graphics theGraphics) {
+        super.paintComponent(theGraphics);
+        final Graphics2D g2d = (Graphics2D) theGraphics;
+        
+        
+        
+        
+    }
+    
+    
+    public class MyMouseListener extends MouseAdapter {
+
+        public void mousePressed(MouseEvent theEvent) {
+           
+           
+            repaint();
+        }
+
+    }
+
+}

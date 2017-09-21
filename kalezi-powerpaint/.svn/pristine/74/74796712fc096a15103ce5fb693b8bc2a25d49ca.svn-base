@@ -1,0 +1,172 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseListener;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.MouseInputAdapter;
+
+import drawingpanel.DrawingPanel;
+
+public class PowerPaintGUI extends JFrame {
+    private JMenuItem myLine = new JMenuItem("Line");
+    private JMenuItem myPencil= new JMenuItem("Pencil");
+    private JMenuItem myRectangle = new JMenuItem("Rectangle");
+    private JMenuItem myEllipse = new JMenuItem("Ellipse");
+    private JMenuItem myThickness = new JMenuItem("Thickness");
+    private JMenuItem myDrawColor = new JMenuItem("Draw Color...");
+    private JMenuItem myFillColor = new JMenuItem("Fill Color...");
+    private JMenuItem myFill = new JMenuItem("Fill");
+    private JMenuItem myAbout = new JMenuItem("About...");
+    private JMenuItem myClear = new JMenuItem("Clear");
+    private JMenuItem myQuit = new JMenuItem("Quit");
+    
+    private JToggleButton myToggleLine = new JToggleButton("Line");
+    private JToggleButton myTogglePencil= new JToggleButton("Pencil");
+    private JToggleButton myToggleRectangle = new JToggleButton("Rectangle");
+    private JToggleButton myToggleEllipse = new JToggleButton("Ellipse");
+       
+
+    public PowerPaintGUI() {
+        super();
+    }
+    
+    public void setUp() {
+        
+        setLayout(new BorderLayout());       
+        setTitle("TCSS 305 PowerPaint");
+        setLocationRelativeTo(null);
+        
+        
+        
+        setJMenuBar(createMenuBar());        
+        
+        DrawingPanel panel = new DrawingPanel();
+        
+        panel.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+        add(panel);
+        
+        panel.add(createToolBar());
+        
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);       
+        pack();
+        setVisible(true);
+    }
+    
+    private JMenuBar createMenuBar() {
+        final JMenuBar bar = new JMenuBar();
+        
+        final JMenu file = new JMenu("File");
+    
+        bar.add(file);
+        file.setMnemonic('F');
+        
+        myClear.setMnemonic('c');
+        file.add(myClear);
+        file.addSeparator();
+        
+        myQuit.setMnemonic('Q');
+        file.add(myQuit);
+        
+        final JMenu options = new JMenu("Options");
+        bar.add(options);
+        options.setMnemonic('O');
+        
+        myThickness.setMnemonic('T');
+        options.add(myThickness);
+        options.addSeparator();
+        
+        myDrawColor.setMnemonic('D');
+        options.add(myDrawColor);
+        
+        myFillColor.setMnemonic('F');
+        options.add(myFillColor);
+        options.addSeparator();
+        
+        myFill.setMnemonic('F');
+        options.add(myFill);
+        
+        final JMenu tools = new JMenu("Tools");
+        bar.add(tools);
+        tools.setMnemonic('T');
+        
+        myLine.setMnemonic('L');
+        tools.add(myLine);  
+        
+        myPencil.setMnemonic('P');
+        tools.add(myPencil);
+        
+        myRectangle.setMnemonic('R');
+        tools.add(myRectangle); 
+        
+        myEllipse.setMnemonic('E');
+        tools.add(myEllipse);
+        
+        
+        final JMenu help = new JMenu("Help");
+        bar.add(help);
+        help.setMnemonic('h');
+        myAbout.setMnemonic('A');
+        help.add(myAbout);
+        
+             
+        return bar;
+        
+    }
+    
+    private JToolBar createToolBar() {
+        JToolBar toolBar = new JToolBar();
+        
+        myToggleLine.setMnemonic('L');
+        toolBar.add(myToggleLine);
+        
+        myTogglePencil.setMnemonic('P');
+        toolBar.add(myTogglePencil);
+        
+        myToggleRectangle.setMnemonic('R');
+        toolBar.add(myToggleRectangle);
+        
+        myToggleEllipse.setMnemonic('E');
+        toolBar.add(myToggleEllipse);
+        
+        return toolBar;
+    }
+    
+    public static void main(String[] theArgs) {
+        new PowerPaintGUI().setUp();
+        
+        try {
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (final UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        } catch (final IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (final InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (final ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        /* Turn off metal's use of bold fonts */
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
+
+    }
+
+}
